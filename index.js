@@ -7,7 +7,7 @@ var area = {
   height: 500
 };
 */
-var set = [
+var tiles = [
   {
     x: 100,
     y: 100,
@@ -21,6 +21,7 @@ var set = [
     height: 100
   }
 ];
+var set = tiler.addTileToSet([tiles[0]], tiles[1]);
 var rects = tiler.svg.setToRects(set);
 rects.forEach(function(rect) {
   app.svg.appendChild(rect);

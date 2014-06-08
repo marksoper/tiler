@@ -1,6 +1,31 @@
 
 var tiler = {};
 
+tiler.relateTiles = function(tile1, tile2) {
+  return {
+    conflicts: false,
+    relationship: "disjoint"
+  }
+};
+
+tiler.addTileToSet = function(set, tile) {
+  var newset = [];
+  for (var i=0; i<set.length; i++) {
+    if (!tiler.relateTiles(tile, set[i])['conflicts']) {
+      newset.push(set[i]);
+    } else {
+      return false;
+    }
+  }
+  newset.push(tile);
+  return newset;
+};
+
+
+//
+// SVG
+//
+
 tiler.svg = {};
 
 tiler.svg.tileToRect = function(tile) {
