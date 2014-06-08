@@ -7,10 +7,21 @@ var area = {
   height: 500
 };
 */
-var t = {
-  x: 100,
-  y: 100,
-  width: 200,
-  height: 100
-};
-app.svg.appendChild(tiler.svg.tileToRect(t));
+var set = [
+  {
+    x: 100,
+    y: 100,
+    width: 200,
+    height: 100
+  },
+  {
+    x: 300,
+    y: 300,
+    width: 200,
+    height: 100
+  }
+];
+var rects = tiler.svg.setToRects(set);
+rects.forEach(function(rect) {
+  app.svg.appendChild(rect);
+});

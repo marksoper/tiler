@@ -13,3 +13,10 @@ tiler.svg.tileToRect = function(tile) {
   return rect;
 };
 
+tiler.svg.setToRects = function(set) {
+  var rects = [];
+  set.forEach(function(tile) {
+    rects.push(tiler.svg.tileToRect(tile));
+  });
+  return rects;
+};
