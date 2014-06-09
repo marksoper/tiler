@@ -22,6 +22,9 @@ tiler.conflict = function(t1, t2, m) {
   return false;
 };
 
+//
+// incomplete
+//
 tiler.conflictTiles = function(t1, t2, margin) {
   if ((Math.abs(t1.x - t2.x) < margin) && (Math.abs(t1.y - t2.y) < margin)) {
     return false;
@@ -33,20 +36,34 @@ tiler.conflictTiles = function(t1, t2, margin) {
 };
 
 tiler.relateTiles = function(t1, t2, m) {
-  return {
+  var relationship = {
     conflicts: false,
     intersects: tiler.intersect(t1, t2, m)
   };
+  return relationship;
 };
 
-tiler.addTileToSet = function(set, tile, margin) {
+tiler.addTileToSet = function(set, tile, margin, over) {
+  if (set.length === 0) {
+    set.push(tile);
+    return true;
+  }
+  var relationship;
+  var accept = false;
   for (var i=0; i<set.length; i++) {
-    if (!tiler.relateTiles(tile, set[i], margin)['intersects']) {
-      return false;
+    relationship = tiler.relateTiles(tile, set[i], margin);
+    if (relationship['intersects']) {
+      accept = true;
+      tile.z = over ? Math.max(tile.z, set[i].z + 1) : Math.min(tile.z, set[i].z - 1);
     }
   }
-  set.push(tile);
-  return true;
+  if (accept) {
+    set.push(tile);
+    return true;
+  } else {
+    console.log("failed to add tile to set");
+    return false;
+  }
 };
 
 

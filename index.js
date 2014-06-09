@@ -31,10 +31,11 @@ for (var i=0; i<100; i++) {
   tile = {
     x: Math.floor(900*Math.random()),
     y: Math.floor(400*Math.random()),
-    h: 100
+    h: 100,
+    z: 0
   };
   tiles.push(tile);
-  tiler.addTileToSet(set, tile, margin);
+  tiler.addTileToSet(set, tile, margin, true);
 }
 var rects = tiler.svg.setToRects(set);
 rects.forEach(function(rect) {
