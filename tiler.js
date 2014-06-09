@@ -1,7 +1,34 @@
 
 var tiler = {};
 
-tiler.relateTiles = function(tile1, tile2) {
+tiler.intersect = function(t1, t2, m) {
+  //
+  // t1 and t2 intersect if both their x and y margin boundaries intersect
+  //
+  var dims = ["x", "y"];
+  var intersects = {};
+  dims.forEach(function(d) {
+    intersects[d] = false;
+    if ( ( (t2[d]+t2.h) > (t1[d]-m) ) && ( t2[d] < (t1[d]+t1.h+m) ) ) {
+      intersects[d] = true;
+    }
+  });
+  return dims.reduce(function(p, c) {
+    return intersects[p] && intersects[c];
+  });
+};
+
+tiler.conflictTiles = function(t1, t2, margin) {
+  if ((Math.abs(t1.x - t2.x) < margin) && (Math.abs(t1.y - t2.y) < margin)) {
+    return false;
+  }
+  if ((Math.abs(t1.x + t1.height - t2.x) < margin) && (Math.abs(t1.y - t2.y) < margin)) {
+    return false;
+  }
+
+};
+
+tiler.relateTiles = function(t1, t2) {
   return {
     conflicts: false,
     relationship: "disjoint"
