@@ -40,16 +40,13 @@ tiler.relateTiles = function(t1, t2, m) {
 };
 
 tiler.addTileToSet = function(set, tile, margin) {
-  var newset = [];
   for (var i=0; i<set.length; i++) {
-    if (tiler.relateTiles(tile, set[i], margin)['intersects']) {
-      newset.push(set[i]);
-    } else {
+    if (!tiler.relateTiles(tile, set[i], margin)['intersects']) {
       return false;
     }
   }
-  newset.push(tile);
-  return newset;
+  set.push(tile);
+  return true;
 };
 
 

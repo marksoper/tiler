@@ -29,12 +29,12 @@ var tile;
 var margin = 5;
 for (var i=0; i<100; i++) {
   tile = {
-    x: 900*Math.random(),
-    y: 400*Math.random(),
+    x: Math.floor(900*Math.random()),
+    y: Math.floor(400*Math.random()),
     h: 100
   };
   tiles.push(tile);
-  set = tiler.addTileToSet(set, tile, margin);
+  tiler.addTileToSet(set, tile, margin);
 }
 var rects = tiler.svg.setToRects(set);
 rects.forEach(function(rect) {
