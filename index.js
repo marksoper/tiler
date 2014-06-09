@@ -1,12 +1,13 @@
 
-var app = {};
-app.svg = document.getElementById("svg");
+
+svg = document.getElementById("svg");
 /*
 var area = {
   width: 1000,
   height: 500
 };
 */
+/*
 var tiles = [
   {
     x: 100,
@@ -21,8 +22,21 @@ var tiles = [
     height: 100
   }
 ];
-var set = tiler.addTileToSet([tiles[0]], tiles[1]);
+*/
+var tiles = [];
+var set= [];
+var tile;
+var margin = 5;
+for (var i=0; i<100; i++) {
+  tile = {
+    x: 900*Math.random(),
+    y: 400*Math.random(),
+    h: 100
+  };
+  tiles.push(tile);
+  set = tiler.addTileToSet(set, tile, margin);
+}
 var rects = tiler.svg.setToRects(set);
 rects.forEach(function(rect) {
-  app.svg.appendChild(rect);
+  svg.appendChild(rect);
 });

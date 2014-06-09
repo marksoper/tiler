@@ -18,6 +18,10 @@ tiler.intersect = function(t1, t2, m) {
   });
 };
 
+tiler.conflict = function(t1, t2, m) {
+  return false;
+};
+
 tiler.conflictTiles = function(t1, t2, margin) {
   if ((Math.abs(t1.x - t2.x) < margin) && (Math.abs(t1.y - t2.y) < margin)) {
     return false;
@@ -28,17 +32,17 @@ tiler.conflictTiles = function(t1, t2, margin) {
 
 };
 
-tiler.relateTiles = function(t1, t2) {
+tiler.relateTiles = function(t1, t2, m) {
   return {
     conflicts: false,
-    relationship: "disjoint"
-  }
+    intersects: tiler.intersect(t1, t2, m)
+  };
 };
 
-tiler.addTileToSet = function(set, tile) {
+tiler.addTileToSet = function(set, tile, margin) {
   var newset = [];
   for (var i=0; i<set.length; i++) {
-    if (!tiler.relateTiles(tile, set[i])['conflicts']) {
+    if (tiler.relateTiles(tile, set[i], margin)['intersects']) {
       newset.push(set[i]);
     } else {
       return false;
@@ -57,11 +61,10 @@ tiler.svg = {};
 
 tiler.svg.tileToRect = function(tile) {
   var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  ["x", "y", "height", "width"].forEach(function(attr) {
-    if (tile[attr]) {
-      rect.setAttribute(attr, tile[attr]);
-    }
-  });
+  rect.setAttribute("x", tile.x);
+  rect.setAttribute("y", tile.y);
+  rect.setAttribute("height", tile.h);
+  rect.setAttribute("width", tile.h);
   return rect;
 };
 
