@@ -77,6 +77,7 @@ tiler.svg.tileToRect = function(tile) {
   var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
   rect.setAttribute("x", tile.x);
   rect.setAttribute("y", tile.y);
+  rect.setAttribute("z", tile.z);
   rect.setAttribute("height", tile.h);
   rect.setAttribute("width", tile.h);
   return rect;

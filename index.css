@@ -1,5 +1,22 @@
 
 rect {
-  fill: #cccccc;
   fill-opacity: 0.8;
+  fill: #f8f8f8;
+  stroke: #ff4444;
+}
+
+rect[z="0"] {
+  fill: #eeeeee;
+}
+
+rect[z="1"] {
+  fill: #cccccc;
+}
+
+rect[z="2"] {
+  fill: #aaaaaa;
+}
+
+rect[z="3"] {
+  fill: #888888;
 }
