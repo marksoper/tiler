@@ -4,18 +4,17 @@ body {
 }
 
 rect {
-  fill: black;
   stroke-width: 1px;
 }
 
 $zLevels: 24;
-$fillColor: #ffffff;
-$strokeColor: #ddcccc;
+$fillColor: #ddcccc;
+$strokeColor: #ccbbbb;
 $rectSlug: rect;
 
 @for $d from 0 through $zLevels - 1 {
   rect[z="#{$d}"] {
-    fill: darken($fillColor, 100*$d/$zLevels);
-    stroke: darken($strokeColor, 100*$d/$zLevels);
+    fill: desaturate($fillColor, 100*$d/$zLevels);
+    stroke: desaturate($strokeColor, 100*$d/$zLevels);
   }
 }

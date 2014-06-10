@@ -27,11 +27,11 @@ var tiles = [];
 var set= [];
 var tile;
 var margin = 5;
-for (var i=0; i<100; i++) {
+for (var i=0; i<800; i++) {
   tile = {
-    x: Math.floor(900*Math.random()),
-    y: Math.floor(400*Math.random()),
-    h: 100,
+    x: Math.floor(960*Math.random()),
+    y: Math.floor(460*Math.random()),
+    h: 40,
     z: 0
   };
   tiles.push(tile);
