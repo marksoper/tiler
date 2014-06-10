@@ -1,23 +1,21 @@
 
+body {
+  background: url("../../images/grid.jpg") repeat 0 0;
+}
 
 rect {
-  fill-opacity: 0.8;
-  fill: #f8f8f8;
-  stroke: #ff4444;
+  fill: black;
+  stroke-width: 1px;
 }
 
-rect[z="0"] {
-  fill: #eeeeee;
-}
+$zLevels: 24;
+$fillColor: #ffffff;
+$strokeColor: #ddcccc;
+$rectSlug: rect;
 
-rect[z="1"] {
-  fill: #cccccc;
-}
-
-rect[z="2"] {
-  fill: #aaaaaa;
-}
-
-rect[z="3"] {
-  fill: #888888;
+@for $d from 0 through $zLevels - 1 {
+  rect[z="#{$d}"] {
+    fill: darken($fillColor, 100*$d/$zLevels);
+    stroke: darken($strokeColor, 100*$d/$zLevels);
+  }
 }

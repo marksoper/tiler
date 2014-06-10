@@ -1,5 +1,9 @@
-
+  
 var tiler = {};
+
+//
+// COMPARING TWO TILES: t1 & t2
+//
 
 tiler.intersect = function(t1, t2, m) {
   //
@@ -43,6 +47,10 @@ tiler.relateTiles = function(t1, t2, m) {
   return relationship;
 };
 
+//
+// TILE SET OPERATIONS
+//
+
 tiler.addTileToSet = function(set, tile, margin, over) {
   if (set.length === 0) {
     set.push(tile);
@@ -66,6 +74,11 @@ tiler.addTileToSet = function(set, tile, margin, over) {
   }
 };
 
+tiler.zSortSet = function(set) {
+  set.sort(function(a,b) {
+    return b.z - a.z;
+  });
+};
 
 //
 // SVG
@@ -85,6 +98,7 @@ tiler.svg.tileToRect = function(tile) {
 
 tiler.svg.setToRects = function(set) {
   var rects = [];
+  tiler.zSortSet(set);
   set.forEach(function(tile) {
     rects.push(tiler.svg.tileToRect(tile));
   });
